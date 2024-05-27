@@ -372,7 +372,6 @@ class Conversation extends BaseModel
             $paginator = $paginator->where('c.direct_message', (bool) $options['filters']['direct_message']);
         }
 
-
         $total = $paginator->distinct('c.id')->toBase()->getCountForPagination();
 
         $paginator = $paginator
@@ -380,7 +379,7 @@ class Conversation extends BaseModel
             ->orderBy('c.id', 'DESC')
             ->distinct('c.updated_at', 'c.id');
 
-        return $paginator->paginate($options['perPage'], [$this->tablePrefix . 'participation.*', 'c.*'], $options['pageName'], $options['page'], $total);
+        return $paginator->paginate($options['perPage'], [$this->tablePrefix.'participation.*', 'c.*'], $options['pageName'], $options['page'], $total);
     }
 
     public function unDeletedCount()
