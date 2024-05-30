@@ -110,9 +110,9 @@ class MessageService
     /**
      * Sends the message.
      *
+     * @return Message
      * @throws Exception
      *
-     * @return Message
      */
     public function send()
     {
@@ -128,7 +128,13 @@ class MessageService
             throw new Exception('Message receiver has not been set');
         }
 
-        $command = new SendMessageCommand($this->recipient, $this->body, $this->sender, $this->type, $this->data);
+        $command = new SendMessageCommand(
+            conversation: $this->recipient,
+            body: $this->body,
+            sender: $this->sender,
+            type: $this->type,
+            data: $this->data
+        );
 
         return $this->commandBus->execute($command);
     }
